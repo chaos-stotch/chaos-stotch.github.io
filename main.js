@@ -52,7 +52,7 @@ const phoneTexture = new THREE.TextureLoader().load("phoneEcommerce.png");
 const phoneMaterial = new THREE.MeshBasicMaterial({ map: phoneTexture, transparent:true });
 const phoneMesh = new THREE.Mesh(phoneGeometry, phoneMaterial);
 
-phoneMesh.position.set(-5.15, .25, 2);
+phoneMesh.position.set(-5.25, .0, 1.95);
 phoneMesh.rotation.set(.125, .25, .25);
 phoneMesh.scale.set(.339, .735, .339)
 scene.add(phoneMesh);
@@ -63,8 +63,8 @@ const phoneTexture2 = new THREE.TextureLoader().load("phoneBlog.png");
 const phoneMaterial2 = new THREE.MeshBasicMaterial({ map: phoneTexture2, transparent:true });
 const phoneMesh2 = new THREE.Mesh(phoneGeometry2, phoneMaterial2);
 
-phoneMesh2.position.set(-4.9, .2, 2);
-phoneMesh2.rotation.set(.125, .25, .25);
+phoneMesh2.position.set(-4.9, .2, 2.25);
+phoneMesh2.rotation.set(.125, -.25, .15);
 phoneMesh2.scale.set(.339, .735, .339)
 scene.add(phoneMesh2);
 phoneMesh2.visible=false
@@ -74,8 +74,8 @@ const phoneTexture3 = new THREE.TextureLoader().load("phoneNews.png");
 const phoneMaterial3 = new THREE.MeshBasicMaterial({ map: phoneTexture3, transparent:true });
 const phoneMesh3 = new THREE.Mesh(phoneGeometry3, phoneMaterial3);
 
-phoneMesh3.position.set(-4.65, .15, 2);
-phoneMesh3.rotation.set(.125, .25, .25);
+phoneMesh3.position.set(-4.55, .225, 2);
+phoneMesh3.rotation.set(-.25, .25, -.25);
 phoneMesh3.scale.set(.339, .735, .339)
 scene.add(phoneMesh3);
 phoneMesh3.visible=false
@@ -89,7 +89,6 @@ const glassMaterial = new THREE.MeshPhysicalMaterial({
     thickness: 5,
 })
 
-
 /**
  * Lights
  */
@@ -100,6 +99,7 @@ light.position.set(0, 4, 7);
 light.target.position.set(0, 0, 0);
 scene.add(light);
 scene.add(light.target);
+console.log(light.intensity)
 
 
 color = 0xC724B1
@@ -130,6 +130,65 @@ setTimeout(function() {
 /**
  * Animations
  */
+
+//Phones
+function rotatePhoneAnimation()
+{
+
+    if (phoneMesh.rotation.y <= .5 && rotationPhoneUp == true)
+    {
+        phoneMesh.rotation.y += .0025
+        phoneMesh.rotation.x += .00125
+
+    }else 
+    {
+        rotationPhoneUp = false
+        phoneMesh.rotation.y -= .0025
+        phoneMesh.rotation.x -= .00125
+
+        if (phoneMesh.rotation.y <= 0.05)
+        {
+            rotationPhoneUp = true
+        }
+    }
+    if (phoneMesh2.rotation.y <= .125 && rotationPhone2Up == true)
+    {
+        phoneMesh2.rotation.y += .0025
+        phoneMesh2.rotation.x += .00125
+
+    }else 
+    {
+        rotationPhone2Up = false
+        phoneMesh2.rotation.y -= .0025
+        phoneMesh2.rotation.x -= .00125
+
+        if (phoneMesh2.rotation.y <= -0.5)
+        {
+            rotationPhone2Up = true
+        }
+    }
+
+    if (phoneMesh3.rotation.y <= .125 && rotationPhone3Up == true)
+    {
+        phoneMesh3.rotation.y += .0025
+        phoneMesh3.rotation.x += .00125
+
+    }else 
+    {
+        rotationPhone3Up = false
+        phoneMesh3.rotation.y -= .0025
+        phoneMesh3.rotation.x -= .00125
+
+        if (phoneMesh3.rotation.y <= -0.5)
+        {
+            rotationPhone3Up = true
+        }
+    }
+
+}
+
+
+// Computer
 function upAndDownAnimation()
 {
     var computer = scene.getObjectByName( "Sketchfab_Scene" );
@@ -258,9 +317,9 @@ function section2Animation(reverse)
         phoneMesh.visible = false
         phoneMesh2.visible = false
         phoneMesh3.visible = false
-        phoneMesh.position.set(-5.15, .25, 2);
-        phoneMesh2.position.set(-4.9, .2, 2);
-        phoneMesh3.position.set(-4.65, .15, 2);
+        phoneMesh.position.set(-5.25, .0, 1.95);
+        phoneMesh2.position.set(-4.9, .2, 2.25);
+        phoneMesh3.position.set(-4.55, .225, 2);
         if (computer.scale.x < 1)
         {
             animationConcluded = false
@@ -270,6 +329,12 @@ function section2Animation(reverse)
             computer.position.x -= 0.0075
             computer.position.y += 0.05
             computer.rotation.y += 0.035
+
+            bgMesh.material.color.r += 0.04
+            bgMesh.material.color.g += 0.04
+            bgMesh.material.color.b += 0.04
+            light.intensity = 2
+            light2.intensity = 2
         }else
         {
             actualSection = 2
@@ -318,6 +383,12 @@ function section2Animation(reverse)
             phoneMesh.position.x += .06
             phoneMesh2.position.x += .06
             phoneMesh3.position.x += .06
+
+            bgMesh.material.color.r -= 0.02
+            bgMesh.material.color.g -= 0.02
+            bgMesh.material.color.b -= 0.02
+            light.intensity = 10
+            light2.intensity = 100
         }else
         {
             actualSection = 3
@@ -385,6 +456,12 @@ function section3Animation(reverse)
             phoneMesh2.position.x += .095
             phoneMesh3.position.x += .095
             
+            bgMesh.material.color.g -= 0.03
+            bgMesh.material.color.b -= 0.06
+            light2.intensity = 100
+
+            var oldLightColor = { isColor: true, r: 0.7803921568627451, g: 0.1411764705882353, b: 0.6941176470588235 }
+            light2.color = oldLightColor
         }else
         {
             actualSection = 3
@@ -433,9 +510,9 @@ function section3Animation(reverse)
         phoneMesh.visible = false
         phoneMesh2.visible = false
         phoneMesh3.visible = false
-        phoneMesh.position.set(-5.15, .25, 2);
-        phoneMesh2.position.set(-4.9, .2, 2);
-        phoneMesh3.position.set(-4.65, .15, 2);
+        phoneMesh.position.set(-5.25, .0, 1.95);
+        phoneMesh2.position.set(-4.9, .2, 2.25);
+        phoneMesh3.position.set(-4.55, .225, 2);
 
         if (computer.scale.x < 1)
         {
@@ -446,6 +523,14 @@ function section3Animation(reverse)
             computer.position.x -= 0.005
             computer.position.y += 0.0015
             computer.rotation.y -= 0.005
+
+            // bgMesh.material.color.r += 0.04
+            bgMesh.material.color.g += 0.015
+            bgMesh.material.color.b += 0.03
+            var newLightColor = { isColor: true, r: .77, g: .77, b: 2.55 }
+
+            light2.intensity = 2
+            light2.color = newLightColor
 
         }else
         {
@@ -497,6 +582,9 @@ document.body.ontouchmove = function(e){
 
 var computerUp = true
 var rotationUp = true
+var rotationPhoneUp = true
+var rotationPhone2Up = true
+var rotationPhone3Up = true
 
 camera.position.z = 5
 
@@ -524,6 +612,8 @@ function renderScene() {
     rotationUpAnimation();
     
     upAndDownAnimation();
+
+    rotatePhoneAnimation();
     
     if (scroll_command != "no command")
     {
