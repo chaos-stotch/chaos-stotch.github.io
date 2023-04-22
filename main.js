@@ -37,6 +37,14 @@ loader.load( '3D_Computer/source/ericsson_military_control_terminal.glb', functi
  * Materials
  */
 
+// glass material
+const glassMaterial = new THREE.MeshPhysicalMaterial({
+    roughness: 0.25,
+    transmission: 1,
+    reflectivity: .5,
+    thickness: 5,
+})
+
 const bgGeometry = new THREE.PlaneGeometry();
 const bgTexture = new THREE.TextureLoader().load("background.jpeg");
 const bgMaterial = new THREE.MeshBasicMaterial({ map: bgTexture });
@@ -81,14 +89,6 @@ scene.add(phoneMesh3);
 phoneMesh3.visible=false
 
 
-// glass material
-const glassMaterial = new THREE.MeshPhysicalMaterial({
-    roughness: 0.25,
-    transmission: 1,
-    reflectivity: .5,
-    thickness: 5,
-})
-
 /**
  * Lights
  */
@@ -120,6 +120,20 @@ function decreaseOpacity() {
         setTimeout(decreaseOpacity, 100);
     } else {
          splashScreen.style.display = "none";
+    }
+}
+
+let textsOpacity = 0
+function increaseTextOpacity() {
+    console.log('hello')
+    var textsVertical = document.querySelectorAll('.flutuantText');
+    if (textsOpacity < 1) {
+        textsOpacity += 0.1;
+        textsVertical[0].style.opacity = textsOpacity;
+        textsVertical[1].style.opacity = textsOpacity;
+        textsVertical[2].style.opacity = textsOpacity;
+        textsVertical[3].style.opacity = textsOpacity;
+        setTimeout(increaseTextOpacity, 100);
     }
 }
 
@@ -335,8 +349,16 @@ function section2Animation(reverse)
             bgMesh.material.color.b += 0.04
             light.intensity = 2
             light2.intensity = 2
+            bgMesh.visible=true
+
         }else
         {
+            var textsVertical = document.querySelectorAll('.flutuantText');
+            textsVertical[0].style.opacity = 0
+            textsVertical[1].style.opacity = 0
+            textsVertical[2].style.opacity = 0
+            textsVertical[3].style.opacity = 0
+            textsOpacity = 0
             actualSection = 2
             animationConcluded = true
         }
@@ -387,10 +409,15 @@ function section2Animation(reverse)
             bgMesh.material.color.r -= 0.02
             bgMesh.material.color.g -= 0.02
             bgMesh.material.color.b -= 0.02
+            
             light.intensity = 10
             light2.intensity = 100
         }else
         {
+            bgMesh.visible=false
+            setTimeout(function() {
+                increaseTextOpacity()
+            }, 1000);
             actualSection = 3
             animationConcluded = true
         }
@@ -442,7 +469,11 @@ function section3Animation(reverse)
         phoneMesh.visible = true
         phoneMesh2.visible = true
         phoneMesh3.visible = true
-        
+
+        //change material
+        var computerModel = scene.getObjectByName( "defaultMaterial" );
+        computerModel.material = glassMaterial
+
         if (computer.scale.x > .5)
         {
             animationConcluded = false
@@ -464,6 +495,12 @@ function section3Animation(reverse)
             light2.color = oldLightColor
         }else
         {
+            bgMesh.visible=false
+            setTimeout(function() {
+                increaseTextOpacity()
+            }, 1000);
+            
+            bgMesh.visible=false
             actualSection = 3
             animationConcluded = true
         }
@@ -514,6 +551,12 @@ function section3Animation(reverse)
         phoneMesh2.position.set(-4.9, .2, 2.25);
         phoneMesh3.position.set(-4.55, .225, 2);
 
+        //change material
+        var computerModel = scene.getObjectByName( "defaultMaterial" );
+        computerModel.material = oldPCMaterial
+
+        bgMesh.visible=true
+
         if (computer.scale.x < 1)
         {
             animationConcluded = false
@@ -529,11 +572,19 @@ function section3Animation(reverse)
             bgMesh.material.color.b += 0.03
             var newLightColor = { isColor: true, r: .77, g: .77, b: 2.55 }
 
+            light.intensity = 1
             light2.intensity = 2
             light2.color = newLightColor
 
         }else
         {
+            var textsVertical = document.querySelectorAll('.flutuantText');
+            textsVertical[0].style.opacity = 0
+            textsVertical[1].style.opacity = 0
+            textsVertical[2].style.opacity = 0
+            textsVertical[3].style.opacity = 0
+            textsOpacity = 0
+
             actualSection = 4
             animationConcluded = true
         }

@@ -15,6 +15,7 @@ body {
     overflow: auto;
     overscroll-behavior-y: none;
     touch-action:none;
+    background: #000;
 }
 
 .splashScreen
@@ -89,6 +90,71 @@ body {
 {
     animation-duration: .5s;
     animation-delay: .5s;
+}
+
+.flutuantText
+{
+    position:fixed;
+    z-index: -100;
+    top: 10%;
+    left: -100%;
+    font-size: 100px;
+    transform: rotate(-20deg);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    width: 300%;
+    opacity: 0;
+}
+
+.flutuantText.v2
+{
+    top: 30%;
+    font-size: 50px;
+    background-color: rgb(39, 39, 39);
+    color: #000;
+}
+.flutuantText.v2 .ticker
+{
+    animation-duration: 90s;
+}
+
+.flutuantText.v3
+{
+    top: 50%;
+    font-size: 150px;
+}
+.flutuantText.v3 .ticker
+{
+    animation-duration: 300s;
+}
+
+.flutuantText.v4
+{
+    top: 80%;
+    font-size: 50px;
+    color: rgb(39, 39, 39);
+}
+.flutuantText.v4 .ticker
+{
+    animation-duration: 30s;
+}
+
+
+.flutuantText .ticker {
+	display: inline-block;
+	height: 2rem;
+	line-height: 2rem;
+	white-space: nowrap;
+	padding-right: 100%;
+	box-sizing: content-box;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	-webkit-animation-name: ticker;
+	animation-name: ticker;
+	-webkit-animation-duration: 45s;
+	animation-duration: 45s;
 }
 
 .section4 .sectionText
@@ -189,7 +255,7 @@ body {
     height: 50px;
     display: none;
 
-    animation: rotate 1.3s linear infinite;
+    animation: rotate 3s linear infinite;
     animation-delay: 1s;
 }
 
@@ -202,7 +268,7 @@ body {
     height: 50px;
     display: none;
 
-    animation: rotate 1.3s linear infinite;
+    animation: rotate 3s linear infinite;
     animation-delay: 2s;
 }
 
@@ -279,6 +345,22 @@ footer
     100% {
       transform: rotatey(0deg);
     }
+}
+
+@keyframes ticker {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		visibility: visible;
+	}
+    50%{
+        -webkit-transform: translate3d(-10%, 0, 0);
+		transform: translate3d(-10%, 0, 0);
+    }
+	100% {
+		-webkit-transform: translate3d(0%, 0, 0);
+		transform: translate3d(0%, 0, 0);
+	}
 }
 
 @media only screen and (max-width: 1200px) 
