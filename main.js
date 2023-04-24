@@ -99,7 +99,6 @@ light.position.set(0, 4, 7);
 light.target.position.set(0, 0, 0);
 scene.add(light);
 scene.add(light.target);
-console.log(light.intensity)
 
 
 color = 0xC724B1
@@ -125,7 +124,6 @@ function decreaseOpacity() {
 
 let textsOpacity = 0
 function increaseTextOpacity() {
-    console.log('hello')
     var textsVertical = document.querySelectorAll('.flutuantText');
     if (textsOpacity < 1) {
         textsOpacity += 0.1;
@@ -499,7 +497,7 @@ function section3Animation(reverse)
             setTimeout(function() {
                 increaseTextOpacity()
             }, 1000);
-            
+
             bgMesh.visible=false
             actualSection = 3
             animationConcluded = true
@@ -627,6 +625,17 @@ document.body.ontouchmove = function(e){
         scroll_command = "up"
     }
     if(newTouchPos < touchPos && scroll_command == "no command") {
+        scroll_command = "down"
+    }
+}
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+    if (e.keyCode == '38') {
+        scroll_command = "up"
+    } else if (e.keyCode == '40')
+    {
         scroll_command = "down"
     }
 }
