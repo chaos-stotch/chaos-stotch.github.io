@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
 *
 {
     margin: 0;
     padding: 0;
-    font-family: 'Cabin', sans-serif;
+    font-family: 'Kalam', cursive;
 }
 
 html {
@@ -70,7 +72,6 @@ body {
 
 .sectionText
 {
-    padding: 5px;
     color: white;
     width: 0;
     border-right: 2px solid;
