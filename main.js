@@ -39,19 +39,19 @@ loader.load( '3D_Computer/source/ericsson_military_control_terminal.glb', functi
 
 // glass material
 const glassMaterial = new THREE.MeshPhysicalMaterial({
-    roughness: 0.25,
+    roughness: 0.1,
     transmission: 1,
     reflectivity: .5,
     thickness: 5,
 })
 
 const bgGeometry = new THREE.PlaneGeometry();
-const bgTexture = new THREE.TextureLoader().load("background.jpeg");
+const bgTexture = new THREE.TextureLoader().load("background.jpg");
 const bgMaterial = new THREE.MeshBasicMaterial({ map: bgTexture });
 const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
 
 bgMesh.position.set(0, 0, -2);
-bgMesh.scale.set(25, 13.75, 25)
+bgMesh.scale.set(25, 18.5, 25)
 scene.add(bgMesh);
 
 // phone images
@@ -101,8 +101,8 @@ scene.add(light);
 scene.add(light.target);
 
 
-color = 0xC724B1
-intensity = 2
+color = 0x71BCE1
+intensity = 1.5
 const light2 = new THREE.DirectionalLight(color, intensity);
 light2.position.set(-4, 5, 7);
 light2.target.position.set(5, 0, 0);
@@ -342,11 +342,11 @@ function section2Animation(reverse)
             computer.position.y += 0.05
             computer.rotation.y += 0.035
 
-            bgMesh.material.color.r += 0.04
-            bgMesh.material.color.g += 0.04
-            bgMesh.material.color.b += 0.04
+            bgMesh.material.color.r += 0.03
+            bgMesh.material.color.g += 0.03
+            bgMesh.material.color.b += 0.03
             light.intensity = 2
-            light2.intensity = 2
+            light2.intensity = 1.5
             bgMesh.visible=true
 
         }else
@@ -404,12 +404,12 @@ function section2Animation(reverse)
             phoneMesh2.position.x += .06
             phoneMesh3.position.x += .06
 
-            bgMesh.material.color.r -= 0.02
-            bgMesh.material.color.g -= 0.02
-            bgMesh.material.color.b -= 0.02
+            bgMesh.material.color.r -= 0.015
+            bgMesh.material.color.g -= 0.015
+            bgMesh.material.color.b -= 0.015
             
             light.intensity = 10
-            light2.intensity = 100
+            light2.intensity = 500
         }else
         {
             bgMesh.visible=false
@@ -468,10 +468,6 @@ function section3Animation(reverse)
         phoneMesh2.visible = true
         phoneMesh3.visible = true
 
-        //change material
-        var computerModel = scene.getObjectByName( "defaultMaterial" );
-        computerModel.material = glassMaterial
-
         if (computer.scale.x > .5)
         {
             animationConcluded = false
@@ -485,12 +481,11 @@ function section3Animation(reverse)
             phoneMesh2.position.x += .095
             phoneMesh3.position.x += .095
             
-            bgMesh.material.color.g -= 0.03
-            bgMesh.material.color.b -= 0.06
-            light2.intensity = 100
+            bgMesh.material.color.r -= 0.02
+            bgMesh.material.color.g -= 0.02
+            bgMesh.material.color.b -= 0.02
+            light2.intensity = 500
 
-            var oldLightColor = { isColor: true, r: 0.7803921568627451, g: 0.1411764705882353, b: 0.6941176470588235 }
-            light2.color = oldLightColor
         }else
         {
             bgMesh.visible=false
@@ -549,10 +544,6 @@ function section3Animation(reverse)
         phoneMesh2.position.set(-4.9, .2, 2.25);
         phoneMesh3.position.set(-4.55, .225, 2);
 
-        //change material
-        var computerModel = scene.getObjectByName( "defaultMaterial" );
-        computerModel.material = oldPCMaterial
-
         bgMesh.visible=true
 
         if (computer.scale.x < 1)
@@ -565,14 +556,12 @@ function section3Animation(reverse)
             computer.position.y += 0.0015
             computer.rotation.y -= 0.005
 
-            // bgMesh.material.color.r += 0.04
-            bgMesh.material.color.g += 0.015
-            bgMesh.material.color.b += 0.03
-            var newLightColor = { isColor: true, r: .77, g: .77, b: 2.55 }
+            bgMesh.material.color.r += 0.01
+            bgMesh.material.color.g += 0.01
+            bgMesh.material.color.b += 0.01
 
-            light.intensity = 1
-            light2.intensity = 2
-            light2.color = newLightColor
+            light.intensity = 2
+            light2.intensity = 1.5
 
         }else
         {
