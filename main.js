@@ -54,6 +54,16 @@ bgMesh.position.set(0, 0, -2);
 bgMesh.scale.set(25, 10.8, 25)
 scene.add(bgMesh);
 
+const floorGeometry = new THREE.PlaneGeometry();
+const floorTexture = new THREE.TextureLoader().load("background.jpg");
+const floorMaterial = new THREE.MeshBasicMaterial({ map: floorTexture });
+const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+
+floorMesh.position.set(0, -2, -4.68);
+floorMesh.scale.set(25, 10.8, 25)
+floorMesh.rotation.set(5, 0, 0)
+scene.add(floorMesh);
+
 // phone images
 const phoneGeometry = new THREE.PlaneGeometry();
 const phoneTexture = new THREE.TextureLoader().load("phoneEcommerce.png");
@@ -88,6 +98,29 @@ phoneMesh3.scale.set(.339, .735, .339)
 scene.add(phoneMesh3);
 phoneMesh3.visible=false
 
+/**
+ * Geometries
+ */
+const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+const cube = new THREE.Mesh(cubeGeometry, glassMaterial);
+scene.add(cube);
+cube.rotation.set(-.25, .25, -.25);
+cube.position.set(-1.5, 2.5, 0);
+
+
+const donutGeometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
+const torus = new THREE.Mesh(donutGeometry, glassMaterial);
+scene.add(torus);
+
+torus.scale.set(.25, .25, .25)
+torus.rotation.set(-.25, .25, -.25);
+torus.position.set(1.25, .5, 2);
+
+const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+const sphere = new THREE.Mesh(sphereGeometry, glassMaterial);
+scene.add(sphere);
+sphere.scale.set(.5, .5, .5)
+sphere.position.set(1, -1, 1);
 
 /**
  * Lights
@@ -101,8 +134,8 @@ scene.add(light);
 scene.add(light.target);
 
 
-color = 0xC724B1
-intensity = 1
+color = 0x4D4DFF
+intensity = 2
 const light2 = new THREE.DirectionalLight(color, intensity);
 light2.position.set(2, 4, 7);
 light2.target.position.set(0, 0, 0);
@@ -198,7 +231,49 @@ function rotatePhoneAnimation()
     }
 
 }
+var cubeUp = true
+var torusUp = true
+function upAndDownAnimationGeometry()
+{
+    //cube
+    cube.rotation.x += 0.01
+    cube.rotation.y -= 0.005
+    torus.rotation.x += 0.005
+    torus.rotation.y -= 0.0025
+    if(cube.position.y <= 3.5 && cubeUp == true)
+    {
+        cube.position.y += 0.0005
+        sphere.position.y -= 0.0005
+        sphere.position.x -= 0.0005
+    }else {
+        cubeUp = false
+        cube.position.y -= 0.0005
+        sphere.position.y += 0.0005
+        sphere.position.x += 0.0005
 
+        if(cube.position.y <= 2.5)
+        {
+            cubeUp = true
+        } 
+    }
+
+    //torus
+    
+    if(torus.position.y <= 1.5 && torusUp == true)
+    {
+        torus.position.y += 0.0025
+        torus.position.x -= 0.00125
+    }else {
+        torus.position.x += 0.00125
+
+        torusUp = false
+        torus.position.y -= 0.0025
+        if(torus.position.y <= .5)
+        {
+            torusUp = true
+        } 
+    }
+}
 
 // Computer
 function upAndDownAnimation()
@@ -232,7 +307,7 @@ function rotationUpAnimation()
     }else {
         rotationUp = false
         computer.rotation.x -= 0.002
-        if(computer.rotation.x <= -.25)
+        if(computer.rotation.x <= .15)
         {
             rotationUp = true
         } 
@@ -240,14 +315,18 @@ function rotationUpAnimation()
 }
 
 var actualSection = 1
-
+var sectionCounter1 = document.querySelector('.sectionCounter.v1');
+var sectionCounter2 = document.querySelector('.sectionCounter.v2');
+var sectionCounter3 = document.querySelector('.sectionCounter.v3');
+var sectionCounter4 = document.querySelector('.sectionCounter.v4');
+sectionCounter1.style.backgroundColor='white'
 var animationConcluded = false
 function section1Animation(reverse)
 {
     var computer = scene.getObjectByName( "Sketchfab_Scene" );
     if (reverse)
     {
-
+        
         //text sections
         var section = document.getElementById("section1")
         section.classList.remove('animated');
@@ -257,6 +336,8 @@ function section1Animation(reverse)
         section2.classList.remove('animated');
         section2.style.display = 'none';
 
+        sectionCounter1.style.backgroundColor='white'
+        sectionCounter2.style.backgroundColor='rgb(133, 133, 133)'
         //animations
         if (computer.rotation.y > -2.5)
         {
@@ -281,6 +362,8 @@ function section1Animation(reverse)
         section2.classList.remove('animated');
         section2.style.display = 'block';
         
+        sectionCounter2.style.backgroundColor='white'
+        sectionCounter1.style.backgroundColor='rgb(133, 133, 133)'
         //animations
         if (computer.rotation.y < -.5)
         {
@@ -324,6 +407,9 @@ function section2Animation(reverse)
         //change material
         var computerModel = scene.getObjectByName( "defaultMaterial" );
         computerModel.material = oldPCMaterial
+
+        sectionCounter2.style.backgroundColor='white'
+        sectionCounter3.style.backgroundColor='rgb(133, 133, 133)'
         //animations
 
         phoneMesh.visible = false
@@ -345,9 +431,12 @@ function section2Animation(reverse)
             bgMesh.material.color.r += 0.03
             bgMesh.material.color.g += 0.03
             bgMesh.material.color.b += 0.03
-            light.intensity = 2.5
-            light2.intensity = 1
+
+            floorMesh.material.color.r += 0.03
+            floorMesh.material.color.g += 0.03
+            floorMesh.material.color.b += 0.03
             bgMesh.visible=true
+            floorMesh.visible=true
 
         }else
         {
@@ -386,6 +475,9 @@ function section2Animation(reverse)
         //change material
         var computerModel = scene.getObjectByName( "defaultMaterial" );
         computerModel.material = glassMaterial
+
+        sectionCounter3.style.backgroundColor='white'
+        sectionCounter2.style.backgroundColor='rgb(133, 133, 133)'
         //animations
 
         phoneMesh.visible = true
@@ -407,12 +499,15 @@ function section2Animation(reverse)
             bgMesh.material.color.r -= 0.015
             bgMesh.material.color.g -= 0.015
             bgMesh.material.color.b -= 0.015
+
+            floorMesh.material.color.r -= 0.015
+            floorMesh.material.color.g -= 0.015
+            floorMesh.material.color.b -= 0.015
             
-            light.intensity = 10
-            light2.intensity = 500
         }else
         {
             bgMesh.visible=false
+            floorMesh.visible=false
             setTimeout(function() {
                 increaseTextOpacity()
             }, 1000);
@@ -444,12 +539,6 @@ function section3Animation(reverse)
         section7.classList.remove('animated');
         section7.style.display = 'block';
 
-        var whatsIcon = document.getElementById("whatsIcon")
-        whatsIcon.classList.remove('animated');
-        whatsIcon.style.display = 'none';
-        var emailIcon = document.getElementById("emailIcon")
-        emailIcon.classList.remove('animated');
-        emailIcon.style.display = 'none';
         var section8 = document.getElementById("section8")
         section8.classList.remove('animated');
         section8.style.display = 'none';
@@ -463,6 +552,8 @@ function section3Animation(reverse)
         section11.classList.remove('animated');
         section11.style.display = 'none';
 
+        sectionCounter3.style.backgroundColor='white'
+        sectionCounter4.style.backgroundColor='rgb(133, 133, 133)'
         //animations
         phoneMesh.visible = true
         phoneMesh2.visible = true
@@ -481,19 +572,24 @@ function section3Animation(reverse)
             phoneMesh2.position.x += .095
             phoneMesh3.position.x += .095
             
-            bgMesh.material.color.r -= 0.02
-            bgMesh.material.color.g -= 0.02
-            bgMesh.material.color.b -= 0.02
-            light2.intensity = 500
+            bgMesh.material.color.r -= 0.024
+            bgMesh.material.color.g -= 0.024
+            bgMesh.material.color.b -= 0.024
+
+            floorMesh.material.color.r -= 0.024
+            floorMesh.material.color.g -= 0.024
+            floorMesh.material.color.b -= 0.024
 
         }else
         {
             bgMesh.visible=false
+            floorMesh.visible=false
             setTimeout(function() {
                 increaseTextOpacity()
             }, 1000);
 
             bgMesh.visible=false
+            floorMesh.visible=false
             actualSection = 3
             animationConcluded = true
         }
@@ -529,13 +625,9 @@ function section3Animation(reverse)
         var section11 = document.getElementById("section11")
         section11.classList.remove('animated');
         section11.style.display = 'block';
-        var whatsIcon = document.getElementById("whatsIcon")
-        whatsIcon.classList.remove('animated');
-        whatsIcon.style.display = 'block';
-        var emailIcon = document.getElementById("emailIcon")
-        emailIcon.classList.remove('animated');
-        emailIcon.style.display = 'block';
 
+        sectionCounter4.style.backgroundColor='white'
+        sectionCounter3.style.backgroundColor='rgb(133, 133, 133)'
         //animations
         phoneMesh.visible = false
         phoneMesh2.visible = false
@@ -545,6 +637,7 @@ function section3Animation(reverse)
         phoneMesh3.position.set(-4.55, .225, 2);
 
         bgMesh.visible=true
+        floorMesh.visible=true
 
         if (computer.scale.x < 1)
         {
@@ -556,12 +649,13 @@ function section3Animation(reverse)
             computer.position.y += 0.0015
             computer.rotation.y -= 0.005
 
-            bgMesh.material.color.r += 0.01
-            bgMesh.material.color.g += 0.01
-            bgMesh.material.color.b += 0.01
+            bgMesh.material.color.r += 0.012
+            bgMesh.material.color.g += 0.012
+            bgMesh.material.color.b += 0.012
+            floorMesh.material.color.r += 0.012
+            floorMesh.material.color.g += 0.012
+            floorMesh.material.color.b += 0.012
 
-            light.intensity = 2.5
-            light2.intensity = 1
 
         }else
         {
@@ -665,6 +759,8 @@ function renderScene() {
     rotationUpAnimation();
     
     upAndDownAnimation();
+
+    upAndDownAnimationGeometry();
 
     rotatePhoneAnimation();
     

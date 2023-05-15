@@ -18,7 +18,8 @@ body {
     overflow: auto;
     overscroll-behavior-y: none;
     touch-action:none;
-    background: #000;
+    background-image: url('./public/background2.jpg');
+    background-size: cover;
 }
 
 .splashScreen
@@ -97,7 +98,7 @@ body {
 .flutuantText
 {
     position:fixed;
-    z-index: -100;
+    z-index: 0;
     top: 10%;
     left: -100%;
     font-size: 100px;
@@ -286,7 +287,8 @@ pre{
     position: absolute;
     height: 30px;
     top: 50%;
-    margin-left: 2rem;
+    right: 0;
+    margin-right: 2rem;
     transform: translatey(-50%);
 }
 
@@ -328,6 +330,26 @@ footer
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.sectionCounters
+{
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 0fr);
+    position: absolute;
+    top: 50%;
+    transform: translatey(-50%);
+    margin: auto;
+}
+
+.sectionCounter
+{
+    width: 10px;
+    height: 10px;
+    margin-left: 2rem;
+    border-radius: 50px;
+    background-color: rgb(133, 133, 133);
 }
 
 @keyframes typing 
