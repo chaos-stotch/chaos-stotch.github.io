@@ -39,7 +39,7 @@ loader.load( '3D_Computer/source/ericsson_military_control_terminal.glb', functi
 
 // glass material
 const glassMaterial = new THREE.MeshPhysicalMaterial({
-    roughness: 0.1,
+    roughness: 0.15,
     transmission: 1,
     reflectivity: .5,
     thickness: 5,
@@ -51,7 +51,7 @@ const bgMaterial = new THREE.MeshBasicMaterial({ map: bgTexture });
 const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
 
 bgMesh.position.set(0, 0, -2);
-bgMesh.scale.set(25, 18.5, 25)
+bgMesh.scale.set(25, 10.8, 25)
 scene.add(bgMesh);
 
 // phone images
@@ -93,19 +93,19 @@ phoneMesh3.visible=false
  * Lights
  */
 var color = 0xffffff;
-var intensity = 2;
+var intensity = 2.5;
 const light = new THREE.DirectionalLight(color, intensity);
-light.position.set(0, 4, 7);
-light.target.position.set(0, 0, 0);
+light.position.set(-5, 5, 9);
+light.target.position.set(5, 0, 0);
 scene.add(light);
 scene.add(light.target);
 
 
-color = 0x71BCE1
-intensity = 1.5
+color = 0xC724B1
+intensity = 1
 const light2 = new THREE.DirectionalLight(color, intensity);
-light2.position.set(-4, 5, 7);
-light2.target.position.set(5, 0, 0);
+light2.position.set(2, 4, 7);
+light2.target.position.set(0, 0, 0);
 scene.add(light2);
 scene.add(light2.target);
 
@@ -345,8 +345,8 @@ function section2Animation(reverse)
             bgMesh.material.color.r += 0.03
             bgMesh.material.color.g += 0.03
             bgMesh.material.color.b += 0.03
-            light.intensity = 2
-            light2.intensity = 1.5
+            light.intensity = 2.5
+            light2.intensity = 1
             bgMesh.visible=true
 
         }else
@@ -560,8 +560,8 @@ function section3Animation(reverse)
             bgMesh.material.color.g += 0.01
             bgMesh.material.color.b += 0.01
 
-            light.intensity = 2
-            light2.intensity = 1.5
+            light.intensity = 2.5
+            light2.intensity = 1
 
         }else
         {
