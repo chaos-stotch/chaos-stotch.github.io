@@ -14,7 +14,8 @@ if (userLanguage === 'pt' || userLanguage === 'pt-BR') {
     '6': '• Etc.',
     '7': 'Desenvolvo qualquer tipo de site, desde o design até a hospedagem',
     '8': 'Contate agora!',
-    '9': 'Vamos começar seu novo site hoje'
+    '9': 'Vamos começar seu novo site hoje',
+    "10": "Meu nome é Vitor de Oliveira, desenvolvedor web"
   };
 } else {
   translations = {
@@ -27,7 +28,8 @@ if (userLanguage === 'pt' || userLanguage === 'pt-BR') {
     '6': '• Etc.',
     '7': 'I develop any type of website, from design to deploy',
     '8': 'Contact now!',
-    '9': "Let's start your new website today"
+    '9': "Let's start your new website today",
+    '10': "My name is Vitor Oliveira, web developer"
   };
 }
 

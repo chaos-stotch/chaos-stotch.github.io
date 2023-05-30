@@ -68,20 +68,19 @@ body {
     display:inline-block;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    align-items: center;
 }
 
 .sectionText
 {
     color: white;
     width: 0;
-    border-right: 2px solid;
     overflow: hidden;
     white-space: nowrap;
     float:left;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: rgba(0, 0, 0, 1);
+    padding: 10px 0px 10px 10px;
     opacity: 0;
+    border-right: 2px solid;
 
     animation: typing;
     animation-duration: 1s;
@@ -192,10 +191,19 @@ pre{
     animation-duration: .5s;
 }
 
+.section12 .sectionText
+{
+    animation-delay: 1.5s;
+}
+
 
 .section1
 {
     bottom: 30%;
+}
+.section12
+{
+    bottom: 20%;
 }
 
 .section2
@@ -358,15 +366,15 @@ footer
 {
     0% { width: 0; opacity: 0; }
     1% { width: 0; opacity: 1; }
-    99% {
+    99%{
         width: 100%;
-        border-right: 2px solid;
         opacity: 1;
+        border-right: 2px solid;
     }
     100%{
         width: 100%;
-        border-right: none;
         opacity: 1;
+        border-right: 2px solid transparent;
     }
 }
 

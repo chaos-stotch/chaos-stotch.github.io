@@ -18,8 +18,13 @@ document.body.appendChild( renderer.domElement );
 
 window.addEventListener( 'resize', onWindowResize );
 
-function onWindowResize() {
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
     renderer.setSize( window.innerWidth, window.innerHeight );
+
 }
 
 camera.position.z = 5;
@@ -333,6 +338,9 @@ function section1Animation(reverse)
         var section = document.getElementById("section1")
         section.classList.remove('animated');
         section.style.display = 'block';
+        var section12 = document.getElementById("section12")
+        section12.classList.remove('animated');
+        section12.style.display = 'block';
 
         var section2 = document.getElementById("section2")
         section2.classList.remove('animated');
@@ -359,6 +367,9 @@ function section1Animation(reverse)
         var section = document.getElementById("section1")
         section.classList.remove('animated');
         section.style.display = 'none';
+        var section12 = document.getElementById("section12")
+        section12.classList.remove('animated');
+        section12.style.display = 'none';
 
         var section2 = document.getElementById("section2")
         section2.classList.remove('animated');
