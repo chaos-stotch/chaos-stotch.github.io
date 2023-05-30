@@ -1,3 +1,5 @@
+import './public/translations/translator.js';
+
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -763,6 +765,16 @@ function renderScene() {
     upAndDownAnimationGeometry();
 
     rotatePhoneAnimation();
+
+    if (actualSection != 3 && textsOpacity != 0)
+    {
+        var textsVertical = document.querySelectorAll('.flutuantText');
+        textsVertical[0].style.opacity = 0
+        textsVertical[1].style.opacity = 0
+        textsVertical[2].style.opacity = 0
+        textsVertical[3].style.opacity = 0
+        textsOpacity = 0
+    }
     
     if (scroll_command != "no command")
     {

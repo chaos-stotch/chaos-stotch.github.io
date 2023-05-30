@@ -87,12 +87,14 @@ body {
     animation-duration: 1s;
     animation-timing-function: steps(30, end);
     animation-fill-mode: forwards;
+
+    animation-delay: .75s;
 }
 
 .section3 .sectionText
 {
     animation-duration: .5s;
-    animation-delay: .5s;
+    animation-delay: 1s;
 }
 
 .flutuantText
@@ -170,19 +172,19 @@ pre{
 .section4 .sectionText
 {
     animation-duration: .3s;
-    animation-delay: 1s;
+    animation-delay: 1.5s;
 }
 
 .section5 .sectionText
 {
     animation-duration: .3s;
-    animation-delay: 1.5s;
+    animation-delay: 2s;
 }
 
 .section6 .sectionText
 {
     animation-duration: .2s;
-    animation-delay: 2s;
+    animation-delay: 2.5s;
 }
 
 .section10 .sectionText
