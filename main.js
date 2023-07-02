@@ -71,6 +71,18 @@ floorMesh.scale.set(25, 10.8, 25)
 floorMesh.rotation.set(5, 0, 0)
 scene.add(floorMesh);
 
+// portfolio images
+const portfolioGeometry = new THREE.PlaneGeometry();
+const portfolioTexture = new THREE.TextureLoader().load("portfolio.png");
+const portfolioMaterial = new THREE.MeshBasicMaterial({ map: portfolioTexture, transparent:true });
+const portfolioMesh = new THREE.Mesh(portfolioGeometry, portfolioMaterial);
+
+portfolioMesh.position.set(0, 0, 0);
+portfolioMesh.scale.set(.75, .75, .75)
+scene.add(portfolioMesh);
+portfolioMesh.visible=false
+
+
 // phone images
 const phoneGeometry = new THREE.PlaneGeometry();
 const phoneTexture = new THREE.TextureLoader().load("phoneEcommerce.png");
@@ -105,28 +117,62 @@ phoneMesh3.scale.set(.339, .735, .339)
 scene.add(phoneMesh3);
 phoneMesh3.visible=false
 
+
+function getGeometry() {
+    var randomNum = Math.floor(Math.random() * 5);
+    if(randomNum == 0) {
+        var randomGeometry = new THREE.IcosahedronGeometry(1, 0);
+        var geometrySizes = [.35, .35, .35]
+    }
+    if(randomNum == 1) {
+        var randomGeometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
+        var geometrySizes = [.25, .25, .25]
+    }
+    if(randomNum == 2) {
+        var randomGeometry = new THREE.SphereGeometry(1, 32, 32);
+        var geometrySizes = [.3, .3, .3]
+    }
+    if(randomNum == 3) {
+        var randomGeometry = new THREE.TetrahedronGeometry(1);
+        var geometrySizes = [.35, .35, .35]
+    }
+    if (randomNum == 4) {
+        var randomGeometry = new THREE.TorusKnotGeometry(1, 0.4, 64, 16);
+        var geometrySizes = [.25, .25, .25]
+    }
+    return [randomGeometry, geometrySizes]
+}
 /**
  * Geometries
  */
-const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-const cube = new THREE.Mesh(cubeGeometry, glassMaterial);
+
+const firstGeometry = getGeometry()
+const icosahedronGeometry = firstGeometry[0]
+const cube = new THREE.Mesh(icosahedronGeometry, glassMaterial);
 scene.add(cube);
+
+var geometrySizes = firstGeometry[1]
+cube.scale.set(geometrySizes[0], geometrySizes[1], geometrySizes[2]);
 cube.rotation.set(-.25, .25, -.25);
 cube.position.set(-1.5, 2.5, 0);
 
-
-const donutGeometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
+const secondGeometry = getGeometry()
+const donutGeometry = secondGeometry[0]
 const torus = new THREE.Mesh(donutGeometry, glassMaterial);
 scene.add(torus);
 
-torus.scale.set(.25, .25, .25)
+var geometrySizes = secondGeometry[1]
+torus.scale.set(geometrySizes[0], geometrySizes[1], geometrySizes[2])
 torus.rotation.set(-.25, .25, -.25);
 torus.position.set(1.25, .5, 2);
 
-const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+const thirdGeometry = getGeometry()
+const sphereGeometry = thirdGeometry[0]
 const sphere = new THREE.Mesh(sphereGeometry, glassMaterial);
 scene.add(sphere);
-sphere.scale.set(.5, .5, .5)
+
+var geometrySizes = thirdGeometry[1]
+sphere.scale.set(geometrySizes[0], geometrySizes[1], geometrySizes[2])
 sphere.position.set(1, -1, 1);
 
 /**
@@ -431,6 +477,8 @@ function section2Animation(reverse)
         phoneMesh.position.set(-5.25, .0, 1.95);
         phoneMesh2.position.set(-4.9, .2, 2.25);
         phoneMesh3.position.set(-4.55, .225, 2);
+
+        portfolioMesh.visible = false
         if (computer.scale.x < 1)
         {
             animationConcluded = false
@@ -532,6 +580,86 @@ function section2Animation(reverse)
 
 function section3Animation(reverse)
 {
+    var xSpeed = 0.01
+
+    portfolioMesh.visible = true
+    if (reverse)
+    {
+        var portfolio = document.querySelector(".checkPortfolio")
+        portfolio.style.display = 'none';
+
+        var section13 = document.querySelector(".section13")
+        section13.style.display = 'none';
+
+        if (phoneMesh.position.z <= 1.95) {
+            phoneMesh.position.z += phoneMesh.scale.z*0.05
+            phoneMesh2.position.z += phoneMesh2.scale.z*0.05
+            phoneMesh3.position.z += phoneMesh3.scale.z*0.05
+
+            portfolioMesh.position.z -= 0.025
+            
+            if (phoneMesh.position.z <= 1.05) {
+                phoneMesh.position.x += xSpeed
+                phoneMesh2.position.x += xSpeed
+                phoneMesh3.position.x += xSpeed
+                portfolioMesh.position.x -= xSpeed
+            } else {
+                phoneMesh.position.x -= xSpeed
+                phoneMesh2.position.x -= xSpeed
+                phoneMesh3.position.x -= xSpeed
+                portfolioMesh.position.x += xSpeed
+            }
+            
+            animationConcluded = false
+        }
+        else {
+
+            phoneMesh.position.x = -0.39
+            phoneMesh2.position.x = -0.04
+            phoneMesh3.position.x = 0.3
+
+            actualSection = 3
+            animationConcluded = true
+        }
+    }
+    else 
+    {
+        if (phoneMesh.position.z >= 0.125) {
+            phoneMesh.position.z -= phoneMesh.scale.z*0.05
+            phoneMesh2.position.z -= phoneMesh2.scale.z*0.05
+            phoneMesh3.position.z -= phoneMesh3.scale.z*0.05
+
+            portfolioMesh.position.z += 0.025
+            
+            if (phoneMesh.position.z >= 1.025) {
+                phoneMesh.position.x -= xSpeed
+                phoneMesh2.position.x -= xSpeed
+                phoneMesh3.position.x -= xSpeed
+                portfolioMesh.position.x += xSpeed
+            } else {
+                phoneMesh.position.x += xSpeed
+                phoneMesh2.position.x += xSpeed
+                phoneMesh3.position.x += xSpeed
+                portfolioMesh.position.x -= xSpeed
+            }
+
+            animationConcluded = false
+        }
+        else {
+            var portfolio = document.querySelector(".checkPortfolio")
+            portfolio.style.display = 'block';
+
+            var section13 = document.querySelector(".section13")
+            section13.style.display = 'block';
+
+            actualSection = 4
+            animationConcluded = true
+        }
+    }
+}
+
+function section4Animation(reverse)
+{
     var computer = scene.getObjectByName( "Sketchfab_Scene" );
     if (reverse)
     {
@@ -565,12 +693,16 @@ function section3Animation(reverse)
         section11.classList.remove('animated');
         section11.style.display = 'none';
 
+        var section13 = document.querySelector(".section13")
+        section13.style.display = 'block';
+
         sectionCounter3.style.backgroundColor='white'
         sectionCounter4.style.backgroundColor='rgb(133, 133, 133)'
         //animations
         phoneMesh.visible = true
         phoneMesh2.visible = true
         phoneMesh3.visible = true
+        portfolioMesh.visible = true
 
         if (computer.scale.x > .5)
         {
@@ -593,6 +725,10 @@ function section3Animation(reverse)
             floorMesh.material.color.g -= 0.024
             floorMesh.material.color.b -= 0.024
 
+            if (portfolioMesh.position.x < -0.1) {
+                portfolioMesh.position.x +=0.1
+            }
+
         }else
         {
             bgMesh.visible=false
@@ -601,9 +737,12 @@ function section3Animation(reverse)
                 increaseTextOpacity()
             }, 1000);
 
+            var portfolio = document.querySelector(".checkPortfolio")
+            portfolio.style.display = 'block';
+
             bgMesh.visible=false
             floorMesh.visible=false
-            actualSection = 3
+            actualSection = 4
             animationConcluded = true
         }
     }
@@ -626,6 +765,12 @@ function section3Animation(reverse)
         section7.classList.remove('animated');
         section7.style.display = 'none';
 
+        var portfolio = document.querySelector(".checkPortfolio")
+        portfolio.style.display = 'none';
+
+        var section13 = document.querySelector(".section13")
+        section13.style.display = 'none';
+
         var section8 = document.getElementById("section8")
         section8.classList.remove('animated');
         section8.style.display = 'block';
@@ -645,9 +790,12 @@ function section3Animation(reverse)
         phoneMesh.visible = false
         phoneMesh2.visible = false
         phoneMesh3.visible = false
-        phoneMesh.position.set(-5.25, .0, 1.95);
-        phoneMesh2.position.set(-4.9, .2, 2.25);
-        phoneMesh3.position.set(-4.55, .225, 2);
+        portfolioMesh.visible = false
+        phoneMesh.position.setX(-5.25);
+        phoneMesh2.position.setX(-4.9);
+        phoneMesh3.position.setX(-4.55);
+        portfolioMesh.position.setX(-5);
+
 
         bgMesh.visible=true
         floorMesh.visible=true
@@ -679,7 +827,7 @@ function section3Animation(reverse)
             textsVertical[3].style.opacity = 0
             textsOpacity = 0
 
-            actualSection = 4
+            actualSection = 5
             animationConcluded = true
         }
     }
@@ -777,7 +925,7 @@ function renderScene() {
 
     rotatePhoneAnimation();
 
-    if (actualSection != 3 && textsOpacity != 0)
+    if (actualSection != 3 && actualSection != 4 && textsOpacity != 0)
     {
         var textsVertical = document.querySelectorAll('.flutuantText');
         textsVertical[0].style.opacity = 0
@@ -786,7 +934,6 @@ function renderScene() {
         textsVertical[3].style.opacity = 0
         textsOpacity = 0
     }
-    
     if (scroll_command != "no command")
     {
         if (scroll_command == "down")
@@ -803,9 +950,17 @@ function renderScene() {
             {
                 section3Animation(false)
             }
+            else if(actualSection == 4)
+            {
+                section4Animation(false)
+            }
 
         }else
         {
+            if (actualSection == 1)
+            {
+                scroll_command = "no command"
+            }
             if (actualSection == 2)
             {
                 section1Animation(true)
@@ -817,6 +972,10 @@ function renderScene() {
             else if (actualSection == 4)
             {
                 section3Animation(true)
+            }
+            else if (actualSection == 5)
+            {
+                section4Animation(true)
             }
             
         }

@@ -77,7 +77,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     float:left;
-    background-color: rgba(0, 0, 0, 1);
+    background: linear-gradient(135deg, #1D2645, #403369, #5C5992);
     padding: 10px 0px 10px 10px;
     opacity: 0;
     border-right: 2px solid;
@@ -96,6 +96,33 @@ body {
     animation-delay: 1s;
 }
 
+.section13 {
+    bottom: 70%;
+    display: none;
+    animation-delay: 0;
+}
+
+.section13 .sectionText {
+    background: linear-gradient(45deg, orange, rgb(255, 183, 50));
+    color: black;
+}
+
+.checkPortfolio {
+    z-index: 10000;
+    position: absolute;
+    bottom: 37%;
+    right: 50%;
+    background: #71BCE1;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    display: none;
+    cursor: pointer;
+}
+
 .flutuantText
 {
     position:fixed;
@@ -108,7 +135,6 @@ body {
     font-weight: bold;
     width: 300%;
     opacity: 0;
-    
 }
 pre{
     font-family: 'Kalam', cursive;
@@ -248,10 +274,18 @@ pre{
     display: none;
 }
 
+.section8 .sectionText {
+    background: linear-gradient(to right, #128C7E, #25D366, #34B7F1);
+}
+
 .section9
 {
     bottom: 50%;
     display: none;
+}
+
+.section9 .sectionText {
+    background: linear-gradient(to right, #006AFF, #00B2FF);
 }
 
 .section10
@@ -374,7 +408,7 @@ footer
     100%{
         width: 100%;
         opacity: 1;
-        border-right: 2px solid transparent;
+        border-right: none;
     }
 }
 
@@ -443,5 +477,10 @@ footer
     #emailIcon
     {
         height: 80px;
+    }
+
+    .checkPortfolio {
+        padding: 20px;
+        font-size: 30px;
     }
 }
