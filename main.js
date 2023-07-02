@@ -591,6 +591,22 @@ function section3Animation(reverse)
         var section13 = document.querySelector(".section13")
         section13.style.display = 'none';
 
+        var section3 = document.getElementById("section3")
+        section3.classList.remove('animated');
+        section3.style.display = 'block';
+        var section4 = document.getElementById("section4")
+        section4.classList.remove('animated');
+        section4.style.display = 'block';
+        var section5 = document.getElementById("section5")
+        section5.classList.remove('animated');
+        section5.style.display = 'block';
+        var section6 = document.getElementById("section6")
+        section6.classList.remove('animated');
+        section6.style.display = 'block';
+        var section7 = document.getElementById("section7")
+        section7.classList.remove('animated');
+        section7.style.display = 'block';
+
         if (phoneMesh.position.z <= 1.95) {
             phoneMesh.position.z += phoneMesh.scale.z*0.05
             phoneMesh2.position.z += phoneMesh2.scale.z*0.05
@@ -624,6 +640,21 @@ function section3Animation(reverse)
     }
     else 
     {
+        var section3 = document.getElementById("section3")
+        section3.classList.remove('animated');
+        section3.style.display = 'none';
+        var section4 = document.getElementById("section4")
+        section4.classList.remove('animated');
+        section4.style.display = 'none';
+        var section5 = document.getElementById("section5")
+        section5.classList.remove('animated');
+        section5.style.display = 'none';
+        var section6 = document.getElementById("section6")
+        section6.classList.remove('animated');
+        section6.style.display = 'none';
+        var section7 = document.getElementById("section7")
+        section7.classList.remove('animated');
+        section7.style.display = 'none';
         if (phoneMesh.position.z >= 0.125) {
             phoneMesh.position.z -= phoneMesh.scale.z*0.05
             phoneMesh2.position.z -= phoneMesh2.scale.z*0.05
@@ -652,6 +683,8 @@ function section3Animation(reverse)
             var section13 = document.querySelector(".section13")
             section13.style.display = 'block';
 
+            portfolioMesh.position.x = 0
+
             actualSection = 4
             animationConcluded = true
         }
@@ -664,22 +697,6 @@ function section4Animation(reverse)
     if (reverse)
     {
         //text sections
-        var section3 = document.getElementById("section3")
-        section3.classList.remove('animated');
-        section3.style.display = 'block';
-        var section4 = document.getElementById("section4")
-        section4.classList.remove('animated');
-        section4.style.display = 'block';
-        var section5 = document.getElementById("section5")
-        section5.classList.remove('animated');
-        section5.style.display = 'block';
-        var section6 = document.getElementById("section6")
-        section6.classList.remove('animated');
-        section6.style.display = 'block';
-        var section7 = document.getElementById("section7")
-        section7.classList.remove('animated');
-        section7.style.display = 'block';
-
         var section8 = document.getElementById("section8")
         section8.classList.remove('animated');
         section8.style.display = 'none';
@@ -728,6 +745,9 @@ function section4Animation(reverse)
             if (portfolioMesh.position.x < -0.1) {
                 portfolioMesh.position.x +=0.1
             }
+            else {
+                portfolioMesh.position.x = 0
+            }
 
         }else
         {
@@ -749,21 +769,7 @@ function section4Animation(reverse)
     else
     {
         //text sections
-        var section3 = document.getElementById("section3")
-        section3.classList.remove('animated');
-        section3.style.display = 'none';
-        var section4 = document.getElementById("section4")
-        section4.classList.remove('animated');
-        section4.style.display = 'none';
-        var section5 = document.getElementById("section5")
-        section5.classList.remove('animated');
-        section5.style.display = 'none';
-        var section6 = document.getElementById("section6")
-        section6.classList.remove('animated');
-        section6.style.display = 'none';
-        var section7 = document.getElementById("section7")
-        section7.classList.remove('animated');
-        section7.style.display = 'none';
+        
 
         var portfolio = document.querySelector(".checkPortfolio")
         portfolio.style.display = 'none';
